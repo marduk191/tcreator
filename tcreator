@@ -4,19 +4,26 @@
 ## email: marduk191@gmail.com
 
 #Set file format for output
-filefmt="wav"
+tgfmt="wav"
 #Audio sample rate
-freq="44100"
+tgfreq="44100"
 #set output folder
-subdir="output"
+tgsubdir="output"
 #Duration of tracks
-trdur="1"
+tgdur="1"
+#Start frequency
+tgbegin="1"
+#Ending frequency
+tgend="50"
+#jump multiple
+tgmultiple="1"
 
-mkdir $subdir
-cd $subdir
+mkdir $tgsubdir
+cd $tgsubdir
 echo "Creating 44,100 wave samples"
-for f in {1..44100}
-do echo "$f Hz">&2
-sox -nt "$filefmt" -r"$freq" -c2 "$f"HZ."$filefmt" synth "$trdur" sine $f
+#from first frequency to end frequency
+for (( n="$tgbegin"; n<="$tgend"; n+="$tgmultiple" ))
+    do echo "$n Hz">&2
+sox -nt "$tgfmt" -r"$tgfreq" -c2 "$n"HZ."$tgfmt" synth "$tgdur" sine $n
 done
-ls -1v > "$subdir".m3u
+ls -1v > "$tgsubdir".m3u
