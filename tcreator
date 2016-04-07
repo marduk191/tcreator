@@ -47,7 +47,7 @@ esac
 #fi   
 
 cd $tgsubdir
-echo "Creating 44,100 wave samples"
+echo "Creating "$tgend" wave samples"
 #from first frequency to end frequency
 for (( n="$tgbegin"; n<="$tgend"; n+="$tgmultiple" ))
     do echo "$n Hz">&2
