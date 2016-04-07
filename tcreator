@@ -18,7 +18,34 @@ tgend="50"
 #jump multiple
 tgmultiple="1"
 
-mkdir $tgsubdir
+#output directory checks/ little redundancy to fix here!
+uinput1=Y
+if ! test -e "$tgsubdir"
+    then mkdir -p "$tgsubdir"
+elif test -e "$tgsubdir"
+    then printf "%s" "Output directory exists, OVERWRITE EXISTING DATA? [Y,N]" && read uinput1 
+fi
+
+case $uinput1 in
+    [yY])
+        rm -rf "$tgsubdir" && mkdir "$tgsubdir"
+        ;;
+    [nN])
+        exit 1
+        ;;
+    *)
+        printf "%s\n" "Wrong key" && exit 1
+        ;;       
+esac
+
+#if [[ "$uinput1" == "Y" ]]
+#    then rm -rf "$tgsubdir" && mkdir "$tgsubdir"
+#elif [[ "$uinput1" == "N" ]]
+#    then exit 1
+#elif [[ "$uinput1" != "Y" ]]
+#    then printf "%s\n" "Invalid key press!" && exit 1
+#fi   
+
 cd $tgsubdir
 echo "Creating 44,100 wave samples"
 #from first frequency to end frequency
