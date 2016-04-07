@@ -53,4 +53,4 @@ for (( n="$tgbegin"; n<="$tgend"; n+="$tgmultiple" ))
     do echo "$n Hz">&2
 sox -nt "$tgfmt" -r"$tgfreq" -c2 "$n"HZ."$tgfmt" synth "$tgdur" sine $n
 done
-ls -1v > "$tgsubdir".m3u
+ls -1v --ignore="*.m3u" > "$tgsubdir".m3u
