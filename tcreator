@@ -1,0 +1,22 @@
+#!/bin/bash
+## Test Tone Generator
+## By marduk191
+## email: marduk191@gmail.com
+
+#Set file format for output
+filefmt="wav"
+#Audio sample rate
+freq="44100"
+#set output folder
+subdir="output"
+#Duration of tracks
+trdur="1"
+
+mkdir $subdir
+cd $subdir
+echo "Creating 44,100 wave samples"
+for f in {1..44100}
+do echo "$f Hz">&2
+sox -nt "$filefmt" -r"$freq" -c2 "$f"HZ."$filefmt" synth "$trdur" sine $f
+done
+ls -1v > "$subdir".m3u
